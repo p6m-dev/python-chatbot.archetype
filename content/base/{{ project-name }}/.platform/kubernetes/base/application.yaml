@@ -1,0 +1,26 @@
+apiVersion: meta.p6m.dev/v1alpha1
+kind: PlatformApplication
+metadata:
+  name: {{ project-prefix }}-{{ app-name }}
+  labels:
+    p6m.dev/app: {{ project-prefix }}-{{ app-name }}
+spec:
+  deployment:
+    image: {{ project-prefix }}-{{ app-name }}-server:latest
+    ports:
+      - protocol: http
+        port: {{ chatbot-port }}
+    readinessProbe:
+      port: {{ chatbot-port }}
+      path: /healthz
+    resources:
+      requests:
+        memory: 4Gi
+        cpu: '2000m'
+      limits:
+        memory: 4Gi
+  networking:
+    ingress:
+      enabled: true
+      oidc: true
+      type: kubernetes

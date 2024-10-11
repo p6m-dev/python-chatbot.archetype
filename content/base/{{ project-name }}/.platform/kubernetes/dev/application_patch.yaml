@@ -1,0 +1,9 @@
+apiVersion: meta.p6m.dev/v1alpha1
+kind: PlatformApplication
+metadata:
+  name: {{ project-prefix }}-{{ app-name }}
+spec:
+  networking:
+    ingress:
+      hostnames:
+        - {{ project-prefix }}-{{ app-name }}.eks.us-west-2.aws.dev.ai-platform.p6m.dev

@@ -1,0 +1,68 @@
+# apiVersion: iam.aws.upbound.io/v1beta1
+# kind: RolePolicyAttachment
+# metadata:
+#   name: {{ project-prefix }}-{{ app-name }}-glue-console-full-access
+# spec:
+#   deletionPolicy: Delete
+#   forProvider:
+#     policyArn: arn:aws:iam::aws:policy/AWSGlueConsoleFullAccess
+#     roleRef:
+#       name: {{ project-prefix }}-{{ app-name }}-role-dev-us-west-2
+# ---
+# apiVersion: iam.aws.upbound.io/v1beta1
+# kind: RolePolicyAttachment
+# metadata:
+#   name: {{ project-prefix }}-{{ app-name }}-glue-service-role
+# spec:
+#   deletionPolicy: Delete
+#   forProvider:
+#     policyArn: arn:aws:iam::aws:policy/AWSGlueServiceRole
+#     roleRef:
+#       name: {{ project-prefix }}-{{ app-name }}-role-dev-us-west-2
+# ---
+# apiVersion: iam.aws.upbound.io/v1beta1
+# kind: RolePolicyAttachment
+# metadata:
+#   name: {{ project-prefix }}-{{ app-name }}-glue-cross-account-access
+# spec:
+#   deletionPolicy: Delete
+#   forProvider:
+#     policyArnRef:
+#       name: glue-cross-account-access
+#     roleRef:
+#       name: {{ project-prefix }}-{{ app-name }}-role-dev-us-west-2
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Policy
+metadata:
+  name: assume-glue-role
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    description: ""
+    path: /
+    policy: |
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Effect": "Allow",
+                  "Action": "sts:AssumeRole",
+                  "Resource": [
+                      "arn:aws:iam::288163945356:role/GlueDataConsumer"
+                  ]
+              }
+          ]
+      }
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  name: {{ project-prefix }}-{{ app-name }}-glue-cross-account-access
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    policyArnRef:
+      name: assume-glue-role
+    roleRef:
+      name: {{ project-prefix }}-{{ app-name }}-role-dev-us-west-2
