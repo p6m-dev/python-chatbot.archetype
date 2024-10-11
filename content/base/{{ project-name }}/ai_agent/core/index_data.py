@@ -9,8 +9,8 @@ from llama_index.embeddings import HuggingFaceEmbedding
 import boto3
 import awswrangler as wr
 import logging
-from ai_agent.core.config import VENTURE_PREFIX, SEGMENTS, PINECONE_ENV, PINECONE_API_KEY, PINECONE_INDEX_METRIC, \
-    EMBEDDING_MODEL_DIMENSIONS, VENTURE_NAME
+from ai_agent.core.config import SOLUTION_PREFIX, SEGMENTS, PINECONE_ENV, PINECONE_API_KEY, PINECONE_INDEX_METRIC, \
+    EMBEDDING_MODEL_DIMENSIONS, SOLUTION_NAME
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] - %(message)s", datefmt="%H:%M:%S")
 logger = logging.getLogger(__name__)
@@ -80,16 +80,16 @@ def main():
                 WITH twitter_data as(
                     SELECT source_name,
                         source_data,
-                        venture_name
+                        solution_name
                     FROM "social"."twitter"
-                    where venture_name = '{VENTURE_NAME}'
+                    where solution_name = '{SOLUTION_NAME}'
                 ),
                 talkwalker_data as(
                     SELECT source_name,
                         source_data,
-                        venture_name
+                        solution_name
                     FROM "social"."talkwalker_iceberg"
-                    where venture_name = '{VENTURE_NAME}'
+                    where solution_name = '{SOLUTION_NAME}'
                 )
                 SELECT source_data body
                 FROM twitter_data
@@ -104,7 +104,7 @@ def main():
         logger.info(f"{segment_name} Segment Name-> {segment_name}")
         logger.info(f"{segment_name} Segment Size-> {df.shape}")
         logger.info(f"{segment_name} Segment Top5-> {df.head()}")
-        init_df_index(df, "body", f"{VENTURE_PREFIX}-agent-{segment_name.lower()}")
+        init_df_index(df, "body", f"{SOLUTION_PREFIX}-agent-{segment_name.lower()}")
     logger.info("Completed Index job")
 
 

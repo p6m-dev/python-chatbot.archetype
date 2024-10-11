@@ -12,7 +12,7 @@ import nltk
 import time
 from ai_agent.core.create_sidebar import sidebar
 import re
-from ai_agent.core.config import VENTURE_PREFIX, SEGMENTS, PINECONE_ENV, PINECONE_API_KEY, PINECONE_INDEX_METRIC
+from ai_agent.core.config import SOLUTION_PREFIX, SEGMENTS, PINECONE_ENV, PINECONE_API_KEY, PINECONE_INDEX_METRIC
 
 nltk.download('punkt')
 
@@ -40,7 +40,7 @@ openai_temperature = st.session_state.get("temperature")
 top_k = st.session_state.get("top_k")
 persona = st.session_state.get("persona")
 
-pinecone_index_name = f"{VENTURE_PREFIX}-agent-{SEGMENTS[0].lower()}"
+pinecone_index_name = f"{SOLUTION_PREFIX}-agent-{SEGMENTS[0].lower()}"
 
 
 @st.cache_resource(show_spinner=False)  # Cache the data loading
@@ -98,7 +98,7 @@ def load_data():
 query_engine = load_data()
 
 if persona == SEGMENTS[0]:
-    pinecone_index_name = f"{VENTURE_PREFIX}-agent-{SEGMENTS[0].lower()}"
+    pinecone_index_name = f"{SOLUTION_PREFIX}-agent-{SEGMENTS[0].lower()}"
     logger.info(f"Selected pinecone_index_name--> {pinecone_index_name}")
     st.cache_resource.clear()
     query_engine = load_data()

@@ -1,5 +1,5 @@
-VENTURE_PREFIX = "sn"
-VENTURE_NAME = "sharkninja"
+SOLUTION_PREFIX = "sn"
+SOLUTION_NAME = "sharkninja"
 SEGMENTS = ["all-segments"]
 PINECONE_API_KEY = ""
 PINECONE_ENV = "us-east-1-aws"
