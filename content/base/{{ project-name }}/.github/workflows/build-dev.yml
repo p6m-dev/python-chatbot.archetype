@@ -18,7 +18,7 @@ jobs:
       UPDATE_MANIFEST_TOKEN: ${{'{'}}{ secrets.UPDATE_MANIFEST_TOKEN }}
       ARTIFACTORY_TOKEN: ${{'{'}}{ secrets.ARTIFACTORY_TOKEN }}
     with:
-      ARTIFACTORY_REGISTRY: "p6m-dev.jfrog.io"
+      ARTIFACTORY_REGISTRY: "p6m.jfrog.io"
       APPS: {{ project-prefix }}-{{ app-name }}
       DOCKER_REPO: p6m-dev-docker/applications
       PYTHON_VERSION: "3.11.6"
