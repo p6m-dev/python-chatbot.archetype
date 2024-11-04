@@ -24,7 +24,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] - %(
 logger = logging.getLogger(__name__)
 
 os.environ["TOKENIZERS_PARALLELISM"] = "False"
-os.environ["OPENAI_API_KEY"] = "sk-svcacct-pw_7HGoeGBPpFTQiDSWvWt5YNZpsmHAXz8vfYuxQE6TpF4zKAZee5SlubFC0-BWseeFxCfhT3BlbkFJhEieGvYmHTt5dTOwOy-BrGwAXJiDgV827i8_eVrMPHJMN6CVljbRWJym3X-UUSTyrXyq9pwA"
+os.environ["OPENAI_API_KEY"] = ""
 
 
 st.markdown("""
