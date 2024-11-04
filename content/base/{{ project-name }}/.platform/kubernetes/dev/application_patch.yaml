@@ -6,4 +6,4 @@ spec:
   networking:
     ingress:
       hostnames:
-        - {{ project-prefix }}-{{ app-name }}.eks.us-west-2.aws.dev.ai-platform.p6m.dev
+        - {{ project-prefix }}-{{ app-name }}.eks.us-east-2.aws.dev.ybor-playground.p6m.run

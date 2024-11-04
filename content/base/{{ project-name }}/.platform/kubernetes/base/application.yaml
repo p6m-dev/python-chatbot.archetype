@@ -5,6 +5,8 @@ metadata:
   labels:
     p6m.dev/app: {{ project-prefix }}-{{ app-name }}
 spec:
+  secrets:
+    - name: ybor-ai-secrets
   deployment:
     image: {{ project-prefix }}-{{ app-name }}-server:latest
     ports:

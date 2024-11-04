@@ -3,14 +3,13 @@ import base64
 
 from ai_agent.core.config import SEGMENTS
 
-MODEL_LIST = ["gpt-3.5-turbo", "gpt-4"]
+MODEL_LIST = ["gpt-4"]
 PERSONA_LIST = SEGMENTS
 
 
 def sidebar():
     with st.sidebar:
-        with open("ai_agent/core/p6m-Logotype-Black-VOS.png", "rb") as f:
-            # with open("p6m-Logotype-Black-VOS.png", "rb") as f:
+        with open("ai_agent/core/logo_dark.png", "rb") as f:
             data = base64.b64encode(f.read()).decode("utf-8")
 
             st.sidebar.markdown(
