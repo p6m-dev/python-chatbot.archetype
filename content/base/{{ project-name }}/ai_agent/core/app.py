@@ -12,19 +12,18 @@ import nltk
 import time
 from ai_agent.core.create_sidebar import sidebar
 import re
-from ai_agent.core.config import SOLUTION_PREFIX, SEGMENTS, PINECONE_ENV, PINECONE_API_KEY, PINECONE_INDEX_METRIC
+from ai_agent.core.config import SOLUTION_PREFIX, SEGMENTS, PINECONE_ENV, PINECONE_API_KEY, PINECONE_INDEX_METRIC, OPENAI_API_KEY
 from pinecone import Pinecone, ServerlessSpec
 from dotenv import load_dotenv
 
 load_dotenv()
-print(os.environ["OPENAI_API_KEY"])
 nltk.download('punkt')
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] - %(message)s", datefmt="%H:%M:%S")
 logger = logging.getLogger(__name__)
 
 os.environ["TOKENIZERS_PARALLELISM"] = "False"
-os.environ["OPENAI_API_KEY"] = ""
+os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 
 
 st.markdown("""
@@ -54,7 +53,6 @@ def load_data():
     with st.spinner(text="Loading and indexing your data, keep it cool..."):
         logger.info('Initializing chatbot')
         time1 = datetime.now()
-        pinecone_api_key = "8ac42f96-d26b-42ae-aa93-3e0d026eeb91"
         pinecone_env = "us-east-1-aws"
         embedding_model_name = "BAAI/bge-small-en-v1.5"
 
@@ -63,7 +61,7 @@ def load_data():
         logger.info(openai_temperature)
         logger.info(top_k)
 
-        pc = Pinecone(api_key=pinecone_api_key)
+        pc = Pinecone(api_key=PINECONE_API_KEY)
 
         if pinecone_index_name not in pc.list_indexes().names():
             pc.create_index(
